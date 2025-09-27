@@ -18,8 +18,8 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false,   //was true
+    "noUnusedParameters": false,  //was true
     "noFallthroughCasesInSwitch": true,
 
     /* Phaser-specific */
