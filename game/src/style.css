@@ -37,6 +37,7 @@ html, body {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  
 }
 canvas {
   display: block;
@@ -119,5 +120,7 @@ button:focus-visible {
     font-family: 'Press Start 2P', monospace !important;
 
   }
+  
 }
+
 

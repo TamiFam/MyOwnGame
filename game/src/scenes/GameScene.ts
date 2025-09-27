@@ -190,6 +190,7 @@ private HIT_COOLDOWN = 1000; // 1 секунда
   }
   
   create() {
+    
 
     //Граффика для чанков
     this.chunkGraphics = this.add.graphics();
@@ -235,10 +236,23 @@ private HIT_COOLDOWN = 1000; // 1 секунда
     this.cameras.main.startFollow(this.player);
     this.cameras.main.setLerp(0.1, 0.1);
     this.cameras.main.setBackgroundColor('#222');
+  //   // ZOOM В ЗАВИСИМОСТИ ОТ УСТРОЙСТВА
+    const screenWidth = this.scale.width;
+  let zoom = 1;
+
+  if (screenWidth < 600) {
+    zoom = 3; // телефон
+  } else if (screenWidth < 1024) {
+    zoom = 2; // планшет
+  } else {
+    zoom = 1; // десктоп
+  }
+
+  this.cameras.main.setZoom(zoom);
 
 
     //Другой текст для игры
-    // const textManager = new TextManager(this);
+    const textManager = new TextManager(this);
 
 
     // ⌨️ Управление
@@ -266,6 +280,7 @@ this.coinManager.initUI()
   
     // 🧠 Контроллер игрока и уровня
     this.controller = new PlayerController(this,this.player, this.keys, this.enemies, this.enemyControllers,this.coinManager);
+    
     
 
 
@@ -369,6 +384,7 @@ this.input.keyboard!.on('keydown-F', () => {
   }).setScrollFactor(0).setDepth(1000);
   this.helpText.setText(`Нажми F чтобы открыть меню навыков\n Нажмите Tab чтобы открыть инвентарь`)
 }
+
   private drawChunkBorders(centerChunkX: number, centerChunkY: number) {
     const CHUNK_WORLD_SIZE = CHUNK_SIZE * TILE_SIZE;
     this.chunkGraphics.clear();
@@ -405,7 +421,57 @@ this.input.keyboard!.on('keydown-F', () => {
       this.physics.add.collider(enemy, layer);
     }
   }
-
+  // private createMobileControls() {
+  //   const buttonSize = 64;
+  //   const margin = 20;
+  //   const yBottom = this.scale.height - buttonSize - margin;
+  
+  //   // 🔽 Влево
+  //   const leftButton = this.add.image(margin + buttonSize, yBottom, 'left-button')
+  //     .setInteractive()
+  //     .setScrollFactor(0)
+  //     .setDepth(1000)
+  //     .setAlpha(0.7);
+  
+  //   // 🔼 Вправо
+  //   const rightButton = this.add.image(margin + buttonSize * 3, yBottom, 'right-button')
+  //     .setInteractive()
+  //     .setScrollFactor(0)
+  //     .setDepth(1000)
+  //     .setAlpha(0.7);
+  
+  //   // 🔼 Вверх
+  //   const upButton = this.add.image(margin + buttonSize * 2, yBottom - buttonSize, 'up-button')
+  //     .setInteractive()
+  //     .setScrollFactor(0)
+  //     .setDepth(1000)
+  //     .setAlpha(0.7);
+  
+  //   // 🔽 Вниз
+  //   const downButton = this.add.image(margin + buttonSize * 2, yBottom + buttonSize, 'down-button')
+  //     .setInteractive()
+  //     .setScrollFactor(0)
+  //     .setDepth(1000)
+  //     .setAlpha(0.7);
+  
+  //   // Обработка нажатий
+  //   leftButton.on('pointerdown', () => this.controller.setMobileDirection('left', true));
+  //   leftButton.on('pointerup', () => this.controller.setMobileDirection('left', false));
+  //   leftButton.on('pointerout', () => this.controller.setMobileDirection('left', false));
+  
+  //   rightButton.on('pointerdown', () => this.controller.setMobileDirection('right', true));
+  //   rightButton.on('pointerup', () => this.controller.setMobileDirection('right', false));
+  //   rightButton.on('pointerout', () => this.controller.setMobileDirection('right', false));
+  
+  //   upButton.on('pointerdown', () => this.controller.setMobileDirection('up', true));
+  //   upButton.on('pointerup', () => this.controller.setMobileDirection('up', false));
+  //   upButton.on('pointerout', () => this.controller.setMobileDirection('up', false));
+  
+  //   downButton.on('pointerdown', () => this.controller.setMobileDirection('down', true));
+  //   downButton.on('pointerup', () => this.controller.setMobileDirection('down', false));
+  //   downButton.on('pointerout', () => this.controller.setMobileDirection('down', false));
+  // }
+  
 
 //ВРАААААААГГГГГГГГГГГГГГГГГГГГГГИ
   private spawnEnemiesInChunk(chunkX: number, chunkY: number) {

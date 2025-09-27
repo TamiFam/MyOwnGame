@@ -138,7 +138,7 @@ export class PlayerController {
   
     this.levelText = this.scene.add.text(this.player.x, this.player.y, `Уровень: ${this.getLevel()}`, {
       fontSize: '10px',         // зафиксированный базовый размер
-      color: '#ffffff',
+      color: '#000',
       fontFamily: 'Arial'
     })
       .setOrigin(0.5, 1)         // по центру, над головой
@@ -149,7 +149,7 @@ export class PlayerController {
   updateLevelText() {
     if (!this.levelText) return;
   
-    const baseScale = 1.1;
+    const baseScale = 1;
     const playerScale = this.player.scale;
     const offsetY = 50 * (playerScale / baseScale); // выше головы, пропорционально
   
